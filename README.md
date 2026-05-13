@@ -73,7 +73,7 @@ Either way, once you have your fresh repo:
 
 ## Prerequisites
 
-- **Godot 4.3+** for the default `app/` setup (swap if you're using a different engine).
+- **Godot 4.5+** for the default `app/` setup (swap if you're using a different engine).
 - **GitHub CLI (`gh`)** if you want the `commit` skill to open PRs for you.
 - **Claude Code** ([install instructions](https://docs.claude.com/en/docs/claude-code/quickstart)).
 

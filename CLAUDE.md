@@ -22,7 +22,7 @@ Philosophy: *the three non-negotiable feel words / pillars (e.g., "heavy, method
 
 ## Technical Baseline
 
-- **Engine:** Godot 4.3+ (replace if using a different stack)
+- **Engine:** Godot 4.5+ (replace if using a different stack)
 - **Language:** GDScript 2.0 — strict static typing mandatory
 - **Resolution:** 1920x1080, Viewport stretch mode
 - **Testing:** gdUnit4 (`godot --headless -s res://addons/gdUnit4/bin/gdUnit4Cli.gd`)
@@ -33,12 +33,11 @@ Philosophy: *the three non-negotiable feel words / pillars (e.g., "heavy, method
 
 ## Working Agreement
 
-- **Red/Green TDD where possible.** Write a failing test first, then the minimum code to pass it, then refactor.
-- **Prefer `.tscn` for layout** — `.gd` scripts hold logic and behaviour, not scene construction.
-- **No multi-line shell commands.** Always single-line strings; line continuations trigger approval prompts.
-- **Cross-domain communication via signals or shared Resources** — never direct `preload("res://src/domains/<other>/...")`.
+- **Red/Green TDD where possible.** Failing test first, minimum code to pass, then refactor.
+- **`.tscn` for layout, `.gd` for behaviour.** Don't construct scenes in script.
+- **Cross-domain communication via `SignalBus` or shared `.tres` Resources** — never direct `preload("res://src/domains/<other>/...")`.
 - **Static typing is mandatory** on public method signatures and `@export var`s.
-- **Read only what you need.** For code edits use `Read`/`Grep`/`Glob` directly; reserve the `Explore` subagent for broad codebase questions and `gather_context` for URLs or files > ~30KB.
+- **Shell:** no `\` line continuations; newlines inside a quoted string are fine. (Enforced by `.claude/settings.json` hook.)
 
 ## Supporting Documents
 

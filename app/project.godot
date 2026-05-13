@@ -13,7 +13,7 @@
 [application]
 
 config/name="My Project"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.5", "GL Compatibility")
 
 [display]
 

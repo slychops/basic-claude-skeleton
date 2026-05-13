@@ -20,8 +20,12 @@ parameters:
 
 ## 1. Safety & Pre-flight
 
-- **Branch Guard:** Identify the default branch via `git remote show origin`. If on the default branch, abort and ask the user to create a feature branch first.
-- **Leak Prevention:** Scan `git diff --cached` and `git diff` for `KEY`, `SECRET`, `PASSWORD`, `TOKEN`, `BEGIN PRIVATE`. If any match, alert the user and STOP.
+- **Branch Guard:** Resolve the default branch in this order:
+  1. `git symbolic-ref --short refs/remotes/origin/HEAD` (strip the `origin/` prefix).
+  2. If no remote is configured: check for `main`, then `master`, then `trunk` via `git show-ref --verify --quiet refs/heads/<name>`.
+  3. If still unresolved: ask the user.
+  If the current branch matches the resolved default, abort and ask the user to create a feature branch first.
+- **Leak Prevention (coarse keyword scan):** Scan `git diff --cached` and `git diff` for provider-prefix patterns (`AKIA[0-9A-Z]{16}`, `ghp_[A-Za-z0-9]{36}`, `sk-[A-Za-z0-9]{20,}`, `xox[baprs]-`, `-----BEGIN (RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----`) and the keywords `KEY`, `SECRET`, `PASSWORD`, `TOKEN`. If any match, alert the user and STOP. This is **not** a real secret scanner — it catches obvious literals only. For real coverage install `gitleaks` or `trufflehog` and run it as a pre-commit hook.
 - **Cleanliness:** Run `git status`. Confirm no untracked files were forgotten — surface anything that looks accidentally excluded.
 
 ## 2. Documentation Sync (Ground-Truth Check)
@@ -34,7 +38,7 @@ Before touching files:
 
 ## 3. Code Review
 
-Run the `review-pr` skill on the current diff:
+Run the `review-pr` skill — it reviews staged + unstaged together, which is what we want pre-commit:
 
 ```
 /review-pr all
@@ -92,4 +96,4 @@ Return to the user:
 
 - This skill never bypasses the review step. If you find yourself wanting to skip it, the right answer is to fix the review findings first, not to skip the gate.
 - Conventional commit prefixes are encouraged: `feat(domain)`, `fix(core)`, `docs(style)`, `refactor`, `test`, `chore`.
-- Multi-line bash commands are forbidden — always single-line invocations.
+- No `\` line continuations and no unescaped real newlines in shell commands — they trigger approval prompts. Newlines *inside* a single quoted string (e.g. a commit message body) are fine, since the shell sees one argument.

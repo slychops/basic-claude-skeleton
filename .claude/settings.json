@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "//": "Project-wide settings shared with the team. Personal overrides go in .claude/settings.local.json (gitignored). See https://code.claude.com/docs/en/settings for the full schema.",
+
+  "hooks": {
+    "//": "Hooks are how project rules become enforceable. The harness runs them — Claude can't bypass them via memory or context tricks. Each hook fires on a lifecycle event; see https://code.claude.com/docs/en/hooks.",
+
+    "PreToolUse": [
+      {
+        "//": "Reject Bash commands with backslash line continuations — CLAUDE.md forbids them because they trigger approval prompts. Newlines inside a quoted string are fine.",
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.command' | grep -qE '\\\\\\s*$' && { echo 'Reject: backslash line continuation (CLAUDE.md rule). Inline it or wrap in a quoted string.' >&2; exit 2; } || exit 0"
+          }
+        ]
+      }
+    ]
+  },
+
+  "//permissions-example": "Uncomment and tune as needed. The fewer-permission-prompts skill can audit your transcripts and suggest entries.",
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr diff:*)"
+    ]
+  }
+}

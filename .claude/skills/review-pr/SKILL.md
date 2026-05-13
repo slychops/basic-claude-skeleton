@@ -33,7 +33,7 @@ Parse `scope` and `source`. Defaults: scope=`all`, source=`staged`.
 |--------|---------|
 | `staged` (or empty) | `git diff` + `git diff --cached` (combine both) |
 | A number (e.g. `123`) | `gh pr diff {number}` |
-| A string (branch name) | `git diff main...{source}` |
+| A string (branch name) | `git diff $(git merge-base HEAD {source})...{source}` — resolve the default branch via `git symbolic-ref --short refs/remotes/origin/HEAD` (strip `origin/`) instead of hardcoding `main`/`master` |
 
 If the diff is empty, return "No changes to review." and stop.
 
@@ -79,6 +79,8 @@ These auto-score +30 confidence:
 - Hardcoded data that should live in a `.tres` Resource.
 
 ### Suggestions (only in `style` scope)
+
+**First: don't do the linter's job.** Most of the items below are caught faster and more reliably by [`gdlint`](https://github.com/Scony/godot-gdscript-toolkit) and `gdformat`. Run those as a pre-commit hook; only flag style issues here that a linter genuinely can't catch (e.g., misleading names, callback-name/signal-name mismatches, structural-but-not-syntactic ordering).
 
 Suppressed in all other scopes to reduce noise:
 

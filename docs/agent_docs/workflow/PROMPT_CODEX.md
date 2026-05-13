@@ -12,7 +12,7 @@
 
 Use this at the start of a fresh chat to set baseline context with any LLM:
 
-> "You are working on **[Project Name]**, a [genre/type] built in Godot 4.3. The repo root holds `docs/`, `.claude/`, `app/`, `README.md`, `CLAUDE.md`; Godot treats `app/` as `res://`.
+> "You are working on **[Project Name]**, a [genre/type] built in Godot 4.5. The repo root holds `docs/`, `.claude/`, `app/`, `README.md`, `CLAUDE.md`; Godot treats `app/` as `res://`.
 >
 > **Hard rules:**
 >

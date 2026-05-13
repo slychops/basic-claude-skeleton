@@ -6,22 +6,26 @@ The defaults assume a **Godot 4** game project, but the structure is light — s
 
 ## How to Use This Repo
 
-1. **Don't fork it on GitHub** — clone it once, drop the `.git` history, and re-initialise:
+The repo is published as a [GitHub template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template/creating-a-repository-from-a-template), so the easiest path is to **click "Use this template" → "Create a new repository"** on the [GitHub page](https://github.com/slychops/basic-claude-skeleton). You'll get a fresh repo with the skeleton's files and a clean history — no manual cleanup needed.
 
-   ```bash
-   git clone https://github.com/slychops/basic-claude-skeleton my-new-project
-   cd my-new-project
-   rm -rf .git
-   git init
-   ```
+Prefer the CLI, or want to work offline? Clone it, drop the history, and re-initialise:
 
-2. **Rename the project** in `app/project.godot` (the `config/name=` line) and update the title in `README.md` and `CLAUDE.md`.
+```bash
+git clone https://github.com/slychops/basic-claude-skeleton my-new-project
+cd my-new-project
+rm -rf .git
+git init
+```
 
-3. **Fill in the agent docs** under `docs/agent_docs/` — they ship as templates with placeholders. Each file has a "How to use this doc" header explaining what it is for.
+Either way, once you have your fresh repo:
 
-4. **Start coding** under `app/src/`. The `*_scope.md` files in each directory are *contracts* describing what is allowed there — Claude will read them before adding files.
+1. **Rename the project** in `app/project.godot` (the `config/name=` line) and update the title in `README.md` and `CLAUDE.md`.
 
-5. **First commit** when the docs reflect your project:
+2. **Fill in the agent docs** under `docs/agent_docs/` — they ship as templates with placeholders. Each file has a "How to use this doc" header explaining what it is for.
+
+3. **Start coding** under `app/src/`. The `*_scope.md` files in each directory are *contracts* describing what is allowed there — Claude will read them before adding files.
+
+4. **First commit** when the docs reflect your project:
 
    ```bash
    git add -A

@@ -1,0 +1,8 @@
+# Code owners — required reviewers for PRs to main.
+# Combined with the "main protection" repository ruleset, every PR touching
+# any file requires @slychops to review before merge. Solo-maintainer note:
+# GitHub will not let you approve your own PR, so the ruleset is configured
+# with required_approving_review_count = 0 — external PRs are still gated on
+# the Code Owner review, but your own PRs can merge without a second reviewer.
+
+* @slychops

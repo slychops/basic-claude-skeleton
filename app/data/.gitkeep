@@ -1,0 +1,11 @@
+# Data Folder
+
+Holds `.tres` (Godot Resource) and `.json` files that drive the game's data-driven systems — item definitions, enemy stats, level templates, configuration tables.
+
+Rules of thumb:
+
+- Prefer `.tres` over `.gd` constants. Tweakable in the Inspector, hot-reloadable, AI-friendly.
+- One Resource per file. Compose larger structures by referencing other Resources.
+- Group by domain when the count grows (e.g. `data/items/`, `data/enemies/`).
+
+Delete this `.gitkeep` once real data files are added.

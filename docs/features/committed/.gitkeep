@@ -1,0 +1,5 @@
+# Committed Features
+
+Locked feature specs that have been agreed and are in active development (or recently shipped). Move files here from `docs/features/` when the spec is no longer up for debate. See `../_README.md` for the full convention.
+
+Delete this `.gitkeep` once real feature specs are committed.

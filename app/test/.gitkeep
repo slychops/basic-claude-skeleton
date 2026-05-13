@@ -1,0 +1,11 @@
+# Test Folder
+
+Test suites live here. The default tooling is **gdUnit4**:
+
+```bash
+godot --headless -s res://addons/gdUnit4/bin/gdUnit4Cli.gd -a res://test/
+```
+
+Mirror the `src/` structure — a test for `src/domains/player/Movement.gd` belongs at `test/domains/player/test_movement.gd`. Follow Red/Green TDD where possible: a failing test must exist before the production code that satisfies it.
+
+Delete this `.gitkeep` once real test files are added.
